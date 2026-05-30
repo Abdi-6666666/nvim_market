@@ -187,4 +187,8 @@ function M.set_cat(idx)
   M.fetch()
 end
 
+vim.api.nvim_create_user_command("GithubMarket", function()
+  require("nvim_market").open()
+end, { desc = "启动 GithubMarket 插件" })
+
 return M
