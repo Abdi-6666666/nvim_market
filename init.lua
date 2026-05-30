@@ -33,7 +33,7 @@ vim.keymap.set('n', '<F11>', function()
   vim.cmd('w')
   local file = vim.fn.expand('%')
   local out = vim.fn.expand('%:r')
-  vim.cmd('!g++ "' .. file .. '" -o "' .. out .. '" -std=c++11 && ./"' .. out .. '"')
+  vim.cmd('!g++ "' .. file .. '" -o "' .. out .. '" -std=c++11 && start cmd /k "' .. out .. ' & pause"')
 end, {desc = "编译并运行 C++ 文件 [F11]"})
 
 -- F5 兼容“新版”一键编译
@@ -251,19 +251,6 @@ require("lazy").setup({
       require("nvim-autopairs").setup()
     end,
   },
-
-  -- 插件市场功能
-  -- 若未有插件"plugins.nvim_market"，可注释掉下一块
-   --{
-   --  "plugins.nvim_market",
-   --  config = function()
-   --   vim.keymap.set('n', '<leader>pm', function()
-   --      require('plugins.nvim_market').open()
-   --  end, { desc = '打开 Neovim 插件市场' })
-   --  end,
-   --},
-
-  -- 中文帮助文档（需本地有中文Vim翻译包）
   {
     "yianwillis/vimcdoc",
     config = function()
