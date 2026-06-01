@@ -39,8 +39,12 @@ M.state = {
 
 -- 打开浮窗
 function M.open()
-  if M.state.buf and api.nvim_buf_is_valid(M.state.buf) then
-    api.nvim_win_set_buf(M.state.win, M.state.buf)
+  -- 检查缓冲区和窗口是否都有效
+  local buf_valid = M.state.buf and api.nvim_buf_is_valid(M.state.buf)
+  local win_valid = M.state.win and api.nvim_win_is_valid(M.state.win)
+  
+  if buf_valid and win_valid then
+    api.nvim_set_current_win(M.state.win)
     return
   end
 
