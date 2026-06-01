@@ -209,7 +209,9 @@ function M.fetch()
     end,
     on_stderr = function(_, data)
       if data and #data > 0 then
-        local error_msg = table.concat(data, '\n')
+        -- 修复：去除换行符，只取第一行错误信息
+        local error_msg = data[1] or ''
+        error_msg = error_msg:gsub('\n', ' '):gsub('\r', '')  -- 清除换行符
         M.render_error('网络错误: ' .. error_msg)
       end
       M.state.loading = false
